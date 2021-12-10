@@ -13,6 +13,11 @@ public class Seller {
 	private String diachi;
 	private String cmnd;
 	private String ngaysinh;
+	private String gioitinh;
+	private String img;
+	private String matkhau;
+	private String tendangnhap;
+	
 	
 	public Seller() {}
 
@@ -56,11 +61,44 @@ public class Seller {
 		this.ngaysinh = ngaysinh;
 	}
 
+	public String getGioitinh() {
+		return gioitinh;
+	}
+
+	public void setGioitinh(String gioitinh) {
+		this.gioitinh = gioitinh;
+	}
+
+	public String getImg() {
+		return img;
+	}
+
+	public void setImg(String img) {
+		this.img = img;
+	}
+
+	public String getMatkhau() {
+		return matkhau;
+	}
+
+	public void setMatkhau(String matkhau) {
+		this.matkhau = matkhau;
+	}
+
+	public String getTendangnhap() {
+		return tendangnhap;
+	}
+
+	public void setTendangnhap(String tendangnhap) {
+		this.tendangnhap = tendangnhap;
+	}
+
 	@Override
 	public String toString() {
 		return "Seller [manguoiban=" + manguoiban + ", tennguoiban=" + tennguoiban + ", sdt=" + sdt + ", diachi="
-				+ diachi + ", cmnd=" + cmnd + ", ngaysinh=" + ngaysinh + "]";
-	};
+				+ diachi + ", cmnd=" + cmnd + ", ngaysinh=" + ngaysinh + ", gioitinh=" + gioitinh + ", img=" + img
+				+ ", matkhau=" + matkhau + ", tendangnhap=" + tendangnhap + "]";
+	}
+
+};
 	
-	
-}

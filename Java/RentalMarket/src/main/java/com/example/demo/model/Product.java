@@ -11,9 +11,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "sanpham")
 public class Product {
 
-	@Id
-	private String _id;
 	
+	private@Id String _id;
 	
 	private String tensanpham;
 	private String soluong;
@@ -76,4 +75,10 @@ public class Product {
 	public void setLoaisanpham(String loaisanpham) {
 		this.loaisanpham = loaisanpham;
 	}
+	@Override
+	public String toString() {
+		return "Product [_id=" + _id + ", tensanpham=" + tensanpham + ", soluong=" + soluong + ", dongia=" + dongia
+				+ ", loaisanpham=" + loaisanpham + ", cuahang=" + cuahang + "]";
+	}
+	
 }

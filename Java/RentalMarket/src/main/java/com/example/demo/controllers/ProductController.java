@@ -22,9 +22,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.exception.ResourceNotFoundException;
+import com.example.demo.exception.ResponseHandler;
 import com.example.demo.model.Product;
 import com.example.demo.repository.ProductRepository;
-
 @CrossOrigin(origins="*")
 @RestController
 @RequestMapping("/product")
@@ -44,16 +44,25 @@ public class ProductController {
 		return productRepository.findById(Id);
 	}
 	@PostMapping("/add")
-	public Product createEmployee(@Validated @RequestBody Product pro) {
-  
-        return productRepository.save(pro);
+	public ResponseEntity<String> createProduct(@Validated @RequestBody Product pro) {
+		try {
+			productRepository.save(pro);
+			return ResponseEntity.ok()
+					.body("True");
+		}catch(Exception e)
+		{
+			System.out.println(e);
+			return ResponseEntity.ok()
+					.body("False");
+		}     
 	}
 	@PutMapping("/update/{id}")
 	public ResponseEntity<String> updatePerson(@PathVariable(value = "id") String id, @Validated @RequestBody Product productDetails) {
 
 		Optional<Product> temp = productRepository.findById(id);
 		Product product=temp.get();
-		System.out.println(product);
+		
+		System.out.println(productDetails);
 		product.setCuahang(productDetails.getCuahang());
 		product.setTensanpham(productDetails.getTensanpham());
 		product.setSoluong(productDetails.getSoluong());
