@@ -8,8 +8,10 @@ import java.util.Random;
 
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,7 +25,7 @@ import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.model.Product;
 import com.example.demo.repository.ProductRepository;
 
-
+@CrossOrigin(origins="*")
 @RestController
 @RequestMapping("/product")
 public class ProductController {
@@ -47,11 +49,9 @@ public class ProductController {
         return productRepository.save(pro);
 	}
 	@PutMapping("/update/{id}")
-	public Product updatePerson(@PathVariable(value = "id") String id, @Validated @RequestBody Product productDetails) {
+	public ResponseEntity<String> updatePerson(@PathVariable(value = "id") String id, @Validated @RequestBody Product productDetails) {
 
-		System.out.println(id);
 		Optional<Product> temp = productRepository.findById(id);
-		
 		Product product=temp.get();
 		System.out.println(product);
 		product.setCuahang(productDetails.getCuahang());
@@ -59,15 +59,17 @@ public class ProductController {
 		product.setSoluong(productDetails.getSoluong());
 		product.setDongia(productDetails.getDongia());
 		product.setLoaisanpham(productDetails.getLoaisanpham());
-		Product updatedPerson = productRepository.save(product);
-		return updatedPerson;
+		productRepository.save(product);
+		
+		return ResponseEntity.ok()
+				.body("True");
 	}
 	@DeleteMapping("/del/{id}")
-	public ResponseEntity<Product> deletePerson(@PathVariable(value = "id") String id) {
+	public ResponseEntity<String> deletePerson(@PathVariable(value = "id") String id) {
 
 		Optional<Product> temp = productRepository.findById(id);
 		Product product=temp.get();
 		productRepository.delete(product);
-		return ResponseEntity.ok().build();
+		return ResponseEntity.ok().body("True");
 	}
 }
