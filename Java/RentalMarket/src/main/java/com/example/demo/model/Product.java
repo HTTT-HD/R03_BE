@@ -19,6 +19,7 @@ public class Product {
 	private String dongia;
 	private String loaisanpham;
 	private String cuahang;
+	private String img;
 	public Product() {}
 	public Product(String name,String soluong, String dongia, String loaisanpham,String cuahang) {
 		   this.tensanpham=name;
@@ -75,10 +76,17 @@ public class Product {
 	public void setLoaisanpham(String loaisanpham) {
 		this.loaisanpham = loaisanpham;
 	}
+	public String getImg() {
+		return img;
+	}
+	public void setImg(String img) {
+		this.img = img;
+	}
 	@Override
 	public String toString() {
 		return "Product [_id=" + _id + ", tensanpham=" + tensanpham + ", soluong=" + soluong + ", dongia=" + dongia
-				+ ", loaisanpham=" + loaisanpham + ", cuahang=" + cuahang + "]";
+				+ ", loaisanpham=" + loaisanpham + ", cuahang=" + cuahang + ", img=" + img + "]";
 	}
+	
 	
 }
