@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import com.example.demo.PaypalConfig.PaypalPaymentIntent;
 import com.example.demo.PaypalConfig.PaypalPaymentMethod;
@@ -15,7 +17,8 @@ import com.paypal.api.payments.RedirectUrls;
 import com.paypal.api.payments.Transaction;
 import com.paypal.base.rest.APIContext;
 import com.paypal.base.rest.PayPalRESTException;
-
+@Service
+@Repository
 public class PaypalService {
 	@Autowired
 	private APIContext apiContext;
