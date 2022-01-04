@@ -1,0 +1,9 @@
+{
+  "RedisCacheSettings": {
+    "Enabled": true,
+    "ConnectionString": "localhost",
+    "AbortOnConnectFail": false,
+    "host": "127.0.0.1",
+    "port": 6379
+  }
+}

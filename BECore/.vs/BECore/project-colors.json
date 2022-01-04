@@ -1,0 +1,31 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "a8b8d6b2-ad91-4f49-8c8a-e658f015406a": {
+      "ProjectGuid": "a8b8d6b2-ad91-4f49-8c8a-e658f015406a",
+      "DisplayName": "Application",
+      "ColorIndex": 0
+    },
+    "493c2575-c536-4822-966c-79f0b16fcc6f": {
+      "ProjectGuid": "493c2575-c536-4822-966c-79f0b16fcc6f",
+      "DisplayName": "BECore.API",
+      "ColorIndex": 1
+    },
+    "ab4ab539-faa2-44ad-b413-bf02ed93d967": {
+      "ProjectGuid": "ab4ab539-faa2-44ad-b413-bf02ed93d967",
+      "DisplayName": "Domain",
+      "ColorIndex": 2
+    },
+    "5a8f9abd-a25c-406d-8139-e915bfee866b": {
+      "ProjectGuid": "5a8f9abd-a25c-406d-8139-e915bfee866b",
+      "DisplayName": "Common",
+      "ColorIndex": 3
+    },
+    "9952dea9-5c6b-4a5a-bf2a-1f0019ccc7c8": {
+      "ProjectGuid": "9952dea9-5c6b-4a5a-bf2a-1f0019ccc7c8",
+      "DisplayName": "Infrastructure.IoC",
+      "ColorIndex": 4
+    }
+  },
+  "NextColorIndex": 5
+}

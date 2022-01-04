@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "dgSpecHash": "eSztGAsU+CXSK32ekMUYhVRgEpGLtvxBFdN4b2Fy5NrQfqmnccIdAbqJtHmyRfVZWJn1OfI/Bv7F4xfFvQHY0Q==",
+  "success": true,
+  "projectFilePath": "E:\\R03_BE\\C#\\BECore\\Common\\Common.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\84976\\.nuget\\packages\\microsoft.aspnetcore.http.abstractions\\2.2.0\\microsoft.aspnetcore.http.abstractions.2.2.0.nupkg.sha512",
+    "C:\\Users\\84976\\.nuget\\packages\\microsoft.aspnetcore.http.features\\2.2.0\\microsoft.aspnetcore.http.features.2.2.0.nupkg.sha512",
+    "C:\\Users\\84976\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\5.0.0\\microsoft.extensions.configuration.abstractions.5.0.0.nupkg.sha512",
+    "C:\\Users\\84976\\.nuget\\packages\\microsoft.extensions.primitives\\5.0.0\\microsoft.extensions.primitives.5.0.0.nupkg.sha512",
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.text.encodings.web\\4.5.0\\system.text.encodings.web.4.5.0.nupkg.sha512"
+  ],
+  "logs": []
+}

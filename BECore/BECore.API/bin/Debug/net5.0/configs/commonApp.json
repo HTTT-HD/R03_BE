@@ -1,0 +1,8 @@
+{
+  "IocApp": {
+    "AppId": "64643AF7-C3D7-44FC-86C2-36ED4541820A",
+    "Url": "http://10.0.0.57:8291",
+    "VerifySsoEndpoint": "/api/CommonLogin/verifySSOToken",
+    "SavePayloadSsoEndpoint": "/api/CommonLogin/savePayload"
+  }
+}
