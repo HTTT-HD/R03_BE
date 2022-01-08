@@ -1,6 +1,7 @@
 ﻿using Common.Enums;
 using Common.Helpers;
 
+using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 namespace Domain.Models
@@ -21,5 +22,7 @@ namespace Domain.Models
         public string TenDangNhap { get; set; }
         [JsonIgnore]
         public string MatKhau { get; set; }
+
+        public string Img { get; set; }
     }
 }

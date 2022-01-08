@@ -6,11 +6,13 @@ using System;
 using Common.ViewModels.Role;
 using Common.ViewModels.Permission;
 using Common.ViewModels.Authentication;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BECore.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class RoleController : ControllerBase
     {
         private readonly IRoleService _service;
@@ -19,7 +21,7 @@ namespace BECore.API.Controllers
         {
             _service=service;
         }
-
+         
         [HttpPost("create-or-update")]
         public async Task<ServiceResponse> Create(RoleViewModel model)
         {

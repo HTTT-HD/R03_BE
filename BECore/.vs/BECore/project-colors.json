@@ -25,7 +25,12 @@
       "ProjectGuid": "9952dea9-5c6b-4a5a-bf2a-1f0019ccc7c8",
       "DisplayName": "Infrastructure.IoC",
       "ColorIndex": 4
+    },
+    "633d9ae3-b6d4-4155-a2d8-0be8d12fb72c": {
+      "ProjectGuid": "633d9ae3-b6d4-4155-a2d8-0be8d12fb72c",
+      "DisplayName": "ElasticSearch",
+      "ColorIndex": 5
     }
   },
-  "NextColorIndex": 5
+  "NextColorIndex": 6
 }

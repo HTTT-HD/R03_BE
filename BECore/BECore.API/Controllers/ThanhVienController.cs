@@ -1,6 +1,7 @@
 ﻿using Application.AuthenticationServices;
 using Common.Utils;
 using Common.ViewModels.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
@@ -9,6 +10,7 @@ namespace BECore.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ThanhVienController : ControllerBase
     {
         private readonly IAuthenticationService _service;
@@ -18,6 +20,7 @@ namespace BECore.API.Controllers
             _service=service;
         }
 
+        [AllowAnonymous]
         [HttpPost("create")]
         public async Task<ServiceResponse> Create(IdentityViewModel model)
         {
@@ -31,9 +34,9 @@ namespace BECore.API.Controllers
         }
 
         [HttpPost("get-all")]
-        public async Task<ServiceResponse> GetAll(IdentityRequest model)
+        public async Task<ServiceResponse> GetAll(IdentityRequest request)
         {
-            return await _service.GetAll(model);
+            return await _service.GetAll(request);
         }
 
         [HttpGet("get-by-id")]
@@ -48,7 +51,6 @@ namespace BECore.API.Controllers
             return await _service.GetUserLogin();
         }
 
-
         [HttpDelete("delete")]
         public async Task<ServiceResponse> DeleteById(Guid id)
         {
@@ -59,6 +61,12 @@ namespace BECore.API.Controllers
         public async Task<ServiceResponse> LoginAction(LoginViewModel model)
         {
             return await _service.LoginAction(model);
+        }
+
+        [HttpGet("index-user")]
+        public async Task IndexUsers()
+        {
+            await _service.IndexUsers();
         }
     }
 }

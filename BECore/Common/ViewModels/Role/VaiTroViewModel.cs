@@ -8,10 +8,8 @@ namespace Common.ViewModels.Role
         public string TenVaiTro { get; set; }
     }
 
-    public class RoleRequest : IPageFilter
+    public class RoleRequest : PageFilter
     {
-        public int PageIndex { get; set; }
-        public int PageSize { get; set; }
         public string TenVaiTro { get; set; }
     }
 

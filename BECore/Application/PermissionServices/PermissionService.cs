@@ -55,7 +55,6 @@ namespace Application.PermissionServices
             {
                 query.Add(nameof(Quyen.Ten), BsonRegularExpression.Create(new Regex(request.Ten.ConvertToUnSign())));
             }
-
             return Ok(await _repository.FindAllAsync<Quyen>(query));
         }
 

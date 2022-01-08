@@ -3,17 +3,12 @@ using Common.Utils;
 using Common.ViewModels.Authentication;
 using Common.ViewModels.Permission;
 using Common.ViewModels.Role;
-
 using Domain;
 using Domain.Models;
 using Domain.Repositories;
-
 using Microsoft.AspNetCore.Http;
-
 using MongoDB.Bson;
-using MongoDB.Driver;
-using MongoDB.Driver.Builders;
-
+using MongoDB.Driver; 
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -67,7 +62,7 @@ namespace Application.RoleServices
         {
             var entity = await _repository.GetById<Vaitro>(id.ToString());
             if (entity == null) return NotFound(Constants.CodeError.NotFound, Constants.MessageResponse.NotFound);
-            await _repository.DeleteAsync(entity.Id.ToString(), entity);
+            await _repository.Remove<Vaitro>(entity.Id.ToString());
             return Ok(true);
         }
 
@@ -85,7 +80,7 @@ namespace Application.RoleServices
             var query = new QueryDocument();
             if (!string.IsNullOrWhiteSpace(request.TenVaiTro))
             {
-                query.Add(nameof(Vaitro.TenKd), BsonRegularExpression.Create(new Regex(request.TenVaiTro)));
+                query.Add(nameof(Vaitro.TenKd), BsonRegularExpression.Create(new Regex(request.TenVaiTro.ConvertToUnSign())));
             }
             var data = _repository.FindForPageAsync<Vaitro>(query, request.PageIndex, request.PageSize);
             var count = _repository.CountAsync<Vaitro>(query);
@@ -110,14 +105,12 @@ namespace Application.RoleServices
             {
                 var check = vaiTro.Quyen.Any(x => x == request.QuyenId);
                 if (check) return Conflict(Constants.CodeError.Conflict, Constants.MessageResponse.ConflictPermission);
-
                 vaiTro.Quyen.Add(request.QuyenId);
             }
             else
             {
                 var check = vaiTro.Quyen.Any(x => x == request.QuyenId);
                 if (!check) return BadRequest(Constants.CodeError.NotFound, Constants.MessageResponse.NotFound);
-
                 vaiTro.Quyen.Remove(request.QuyenId);
             }
 

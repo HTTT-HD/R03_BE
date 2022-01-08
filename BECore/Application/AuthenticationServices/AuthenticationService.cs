@@ -5,6 +5,7 @@ using Common.ViewModels.Authentication;
 using Domain;
 using Domain.Models;
 using Domain.Repositories;
+using ElasticSearch.IServices;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -26,16 +27,19 @@ namespace Application.AuthenticationServices
         private readonly IMongoRepository _mongoRepository;
         private readonly IMapper _mapper;
         private readonly IConfiguration _configuration;
+        private readonly IES_ThanhVien _es;
 
         public AuthenticationService(
             IHttpContextAccessor httpContextAccessor,
             IMongoRepository mongoRepository,
             IMapper mapper,
-            IConfiguration configuration) : base(httpContextAccessor)
+            IConfiguration configuration, 
+            IES_ThanhVien es) : base(httpContextAccessor)
         {
             _mongoRepository=mongoRepository;
             _mapper=mapper;
             _configuration = configuration;
+            _es = es;
         }
 
         public async Task<ServiceResponse> CreateAsync(IdentityViewModel model)
@@ -45,8 +49,7 @@ namespace Application.AuthenticationServices
 
             var thanhVien = _mapper.Map<ThanhVien>(model);
             thanhVien.MatKhau = model.MatKhau.HashSha512();
-            thanhVien = await _mongoRepository.AddAsync<ThanhVien>(thanhVien);
-
+            await _mongoRepository.AddAsync<ThanhVien>(thanhVien);
             return Created(thanhVien);
         }
 
@@ -64,8 +67,9 @@ namespace Application.AuthenticationServices
             thanhVien.DiaChi = model.DiaChi;
             thanhVien.CMND = model.CMND;
             thanhVien.GioiTinh = model.GioiTinh.GetValueOrDefault();
+            thanhVien.Img = model.Img;
 
-            thanhVien = await _mongoRepository.UpdateAsnyc<ThanhVien>(thanhVien.Id.ToString(), thanhVien);
+            await _mongoRepository.UpdateAsnyc<ThanhVien>(thanhVien.Id.ToString(), thanhVien);
             return Ok(thanhVien);
         }
 
@@ -110,6 +114,11 @@ namespace Application.AuthenticationServices
             var count = _mongoRepository.CountAsync<ThanhVien>(query);
             await Task.WhenAll(thanhViens, count);
             return Ok(result.Page(thanhViens.Result, request.PageIndex, request.PageSize, count.Result));
+        }
+
+        public async Task<ServiceResponse> GetAllEs(IdentityRequest request)
+        {
+            return Ok(await _es.GetAll(request));
         }
 
         public async Task<ServiceResponse> GetById(Guid id)
@@ -196,6 +205,26 @@ namespace Application.AuthenticationServices
             result.Expiration = token.ValidTo;
 
             return Ok(result);
+        }
+
+        public async Task<ServiceResponse> IndexUsers()
+        {
+            _es.DeleteIndex();
+            var data = _mongoRepository.AsQueryable<ThanhVien>().Select(x => new UserESViewModel()
+            {
+                Id = x.Id,
+                MaThanhVien = x.MaThanhVien,
+                TenThanhVien = x.TenThanhVien,
+                CMND = x.CMND,
+                TenDangNhap = x.TenDangNhap,
+                MatKhau = x.MatKhau,
+                DiaChi = x.DiaChi,
+                GioiTinh = x.GioiTinh,
+                SoDienThoai = x.SoDienThoai,
+                CreateAt = x.CreateAt
+            });
+            await _es.SynchronizedData(data);
+            return Ok(true);
         }
     }
 }

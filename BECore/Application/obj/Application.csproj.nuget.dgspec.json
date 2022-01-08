@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\R03_BE\\C#\\BECore\\Application\\Application.csproj": {}
+    "E:\\BECore\\Application\\Application.csproj": {}
   },
   "projects": {
-    "E:\\R03_BE\\C#\\BECore\\Application\\Application.csproj": {
+    "E:\\BECore\\Application\\Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\R03_BE\\C#\\BECore\\Application\\Application.csproj",
+        "projectUniqueName": "E:\\BECore\\Application\\Application.csproj",
         "projectName": "Application",
-        "projectPath": "E:\\R03_BE\\C#\\BECore\\Application\\Application.csproj",
+        "projectPath": "E:\\BECore\\Application\\Application.csproj",
         "packagesPath": "C:\\Users\\84976\\.nuget\\packages\\",
-        "outputPath": "E:\\R03_BE\\C#\\BECore\\Application\\obj\\",
+        "outputPath": "E:\\BECore\\Application\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -31,11 +31,14 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "E:\\R03_BE\\C#\\BECore\\Common\\Common.csproj": {
-                "projectPath": "E:\\R03_BE\\C#\\BECore\\Common\\Common.csproj"
+              "E:\\BECore\\Common\\Common.csproj": {
+                "projectPath": "E:\\BECore\\Common\\Common.csproj"
               },
-              "E:\\R03_BE\\C#\\BECore\\Domain\\Domain.csproj": {
-                "projectPath": "E:\\R03_BE\\C#\\BECore\\Domain\\Domain.csproj"
+              "E:\\BECore\\Domain\\Domain.csproj": {
+                "projectPath": "E:\\BECore\\Domain\\Domain.csproj"
+              },
+              "E:\\BECore\\ElasticSearch\\ElasticSearch.csproj": {
+                "projectPath": "E:\\BECore\\ElasticSearch\\ElasticSearch.csproj"
               }
             }
           }
@@ -53,6 +56,14 @@
             "AutoMapper": {
               "target": "Package",
               "version": "[10.1.1, )"
+            },
+            "Hangfire": {
+              "target": "Package",
+              "version": "[1.7.27, )"
+            },
+            "Hangfire.Mongo": {
+              "target": "Package",
+              "version": "[0.7.27, )"
             },
             "Microsoft.AspNetCore.Http.Abstractions": {
               "target": "Package",
@@ -94,14 +105,14 @@
         }
       }
     },
-    "E:\\R03_BE\\C#\\BECore\\Common\\Common.csproj": {
+    "E:\\BECore\\Common\\Common.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\R03_BE\\C#\\BECore\\Common\\Common.csproj",
+        "projectUniqueName": "E:\\BECore\\Common\\Common.csproj",
         "projectName": "Common",
-        "projectPath": "E:\\R03_BE\\C#\\BECore\\Common\\Common.csproj",
+        "projectPath": "E:\\BECore\\Common\\Common.csproj",
         "packagesPath": "C:\\Users\\84976\\.nuget\\packages\\",
-        "outputPath": "E:\\R03_BE\\C#\\BECore\\Common\\obj\\",
+        "outputPath": "E:\\BECore\\Common\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -161,14 +172,14 @@
         }
       }
     },
-    "E:\\R03_BE\\C#\\BECore\\Domain\\Domain.csproj": {
+    "E:\\BECore\\Domain\\Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\R03_BE\\C#\\BECore\\Domain\\Domain.csproj",
+        "projectUniqueName": "E:\\BECore\\Domain\\Domain.csproj",
         "projectName": "Domain",
-        "projectPath": "E:\\R03_BE\\C#\\BECore\\Domain\\Domain.csproj",
+        "projectPath": "E:\\BECore\\Domain\\Domain.csproj",
         "packagesPath": "C:\\Users\\84976\\.nuget\\packages\\",
-        "outputPath": "E:\\R03_BE\\C#\\BECore\\Domain\\obj\\",
+        "outputPath": "E:\\BECore\\Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -188,8 +199,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "E:\\R03_BE\\C#\\BECore\\Common\\Common.csproj": {
-                "projectPath": "E:\\R03_BE\\C#\\BECore\\Common\\Common.csproj"
+              "E:\\BECore\\Common\\Common.csproj": {
+                "projectPath": "E:\\BECore\\Common\\Common.csproj"
               }
             }
           }
@@ -207,6 +218,77 @@
             "MongoDB.Driver": {
               "target": "Package",
               "version": "[2.14.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "E:\\BECore\\ElasticSearch\\ElasticSearch.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "E:\\BECore\\ElasticSearch\\ElasticSearch.csproj",
+        "projectName": "ElasticSearch",
+        "projectPath": "E:\\BECore\\ElasticSearch\\ElasticSearch.csproj",
+        "packagesPath": "C:\\Users\\84976\\.nuget\\packages\\",
+        "outputPath": "E:\\BECore\\ElasticSearch\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\84976\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {
+              "E:\\BECore\\Common\\Common.csproj": {
+                "projectPath": "E:\\BECore\\Common\\Common.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "dependencies": {
+            "Elasticsearch.Net": {
+              "target": "Package",
+              "version": "[7.16.0, )"
+            },
+            "NEST": {
+              "target": "Package",
+              "version": "[7.16.0, )"
             }
           },
           "imports": [

@@ -557,11 +557,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\R03_BE\\C#\\BECore\\Domain\\Domain.csproj",
+      "projectUniqueName": "E:\\BECore\\Domain\\Domain.csproj",
       "projectName": "Domain",
-      "projectPath": "E:\\R03_BE\\C#\\BECore\\Domain\\Domain.csproj",
+      "projectPath": "E:\\BECore\\Domain\\Domain.csproj",
       "packagesPath": "C:\\Users\\84976\\.nuget\\packages\\",
-      "outputPath": "E:\\R03_BE\\C#\\BECore\\Domain\\obj\\",
+      "outputPath": "E:\\BECore\\Domain\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -581,8 +581,8 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "E:\\R03_BE\\C#\\BECore\\Common\\Common.csproj": {
-              "projectPath": "E:\\R03_BE\\C#\\BECore\\Common\\Common.csproj"
+            "E:\\BECore\\Common\\Common.csproj": {
+              "projectPath": "E:\\BECore\\Common\\Common.csproj"
             }
           }
         }

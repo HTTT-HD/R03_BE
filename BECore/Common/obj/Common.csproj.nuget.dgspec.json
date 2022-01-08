@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\R03_BE\\C#\\BECore\\Common\\Common.csproj": {}
+    "E:\\BECore\\Common\\Common.csproj": {}
   },
   "projects": {
-    "E:\\R03_BE\\C#\\BECore\\Common\\Common.csproj": {
+    "E:\\BECore\\Common\\Common.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\R03_BE\\C#\\BECore\\Common\\Common.csproj",
+        "projectUniqueName": "E:\\BECore\\Common\\Common.csproj",
         "projectName": "Common",
-        "projectPath": "E:\\R03_BE\\C#\\BECore\\Common\\Common.csproj",
+        "projectPath": "E:\\BECore\\Common\\Common.csproj",
         "packagesPath": "C:\\Users\\84976\\.nuget\\packages\\",
-        "outputPath": "E:\\R03_BE\\C#\\BECore\\Common\\obj\\",
+        "outputPath": "E:\\BECore\\Common\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

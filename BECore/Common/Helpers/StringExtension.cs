@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System; 
 using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+using System.Text.RegularExpressions; 
 
 namespace Common.Helpers
 {
@@ -111,5 +108,39 @@ namespace Common.Helpers
             if (string.IsNullOrWhiteSpace(input)) return null;
             return input.Trim();
         }
+
+        public static string Escape(string s)
+        {
+            StringBuilder sb = new StringBuilder();
+            if (string.IsNullOrEmpty(s))
+            {
+                return null;
+            }
+            for (int i = 0; i < s.Length; i++)
+            {
+                char c = s[i];
+                // These characters are part of the query syntax and must be escaped
+                if (c == '\\' || c == '+' || c == '-' || c == '!' || c == '(' || c == ')' || c == ':'
+                  || c == '^' || c == '[' || c == ']' || c == '\"' || c == '{' || c == '}' || c == '~'
+                  || c == '*' || c == '?' || c == '|' || c == '&' || c == '/')
+                {
+                    sb.Append('\\');
+                }
+                sb.Append(c);
+            }
+            return sb.ToString();
+        }
+        public static string ToCamelCase(this string source)
+        {
+            if (string.IsNullOrWhiteSpace(source))
+                return source;
+            return Char.ToLowerInvariant(source[0]) + source.Substring(1);
+        }
+
+        public static string ToWildcardSearchValue(this string source)
+        {
+            return $"*{source}*";
+        }
+
     }
 }

@@ -1,6 +1,6 @@
 {
   "MongodbConnectionStrings": {
-    // mongodb://localhost:27017
+    // mongodb+srv://admin1:Trn1401@cluster0.218zm.mongodb.net
     "ServerName": "mongodb+srv://admin1:Trn1401@cluster0.218zm.mongodb.net",
     "DatabaseName": "dichoho",
     "HangfireDb": "hangfire_db"

@@ -26,7 +26,7 @@ namespace Domain.Models
         public Guid Id { get; set; }
         [JsonIgnore]
         public DateTime CreateAt { get; set; }
-        [JsonIgnore]
+        
         [BsonRepresentation(BsonType.String)]
         public Guid CreateBy { get; set; }
         [JsonIgnore]

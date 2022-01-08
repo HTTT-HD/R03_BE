@@ -3,6 +3,15 @@ namespace Common.Helpers
 {
     public static class Constants
     {
+        public static class ElasticSearch
+        {
+            public const string URL = "http://localhost:9200";
+            public const bool Enabled = true;
+            public const string Enviroment = "dev";
+            public const string UserEs = "users";
+            public const string Products = "products";
+        }
+
         public static class AuthConfig
         {
             public const string CheckPass = nameof(CheckPass);
@@ -34,6 +43,8 @@ namespace Common.Helpers
             public const string ConflictUserInRole = "Tài khoản đã tồn tại!";
             public const string LoginFailed = "Tài khoản hoặc mật khẩu không chính xác!";
             public const string LoginSuccessfully = "Đăng nhập thành công!";
+            public const string NotEnough = "Số lượng sản phẩm không đủ!";
+
         }
         public static class CodeError
         {
@@ -45,6 +56,7 @@ namespace Common.Helpers
             public const string NotValue = "G006";
             public const string NotStatus = "G007";
             public const string Conflict = "G008";
+            public const string NotEnough = "G008";
         }
 
         public static class Principal

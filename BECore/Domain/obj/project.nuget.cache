@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Nsx/WmGNEnbcfcMkBxDHw8fDenKOcx/CASzso/CuLzDEBmQ76/8A2PiJYOV0irhKeLO/VNaTC+QJSHMpMYGOaA==",
+  "dgSpecHash": "wGHYgUPsPm6kiyI0XsS77uAtAFMmnT0Fmz2LC5AyHQafvwJLbmyzaQyWCvGI/R9ChKfaIYQi0uFoQFwzZl2nJA==",
   "success": true,
-  "projectFilePath": "E:\\R03_BE\\C#\\BECore\\Domain\\Domain.csproj",
+  "projectFilePath": "E:\\BECore\\Domain\\Domain.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\84976\\.nuget\\packages\\dnsclient\\1.4.0\\dnsclient.1.4.0.nupkg.sha512",
     "C:\\Users\\84976\\.nuget\\packages\\microsoft.aspnetcore.http.abstractions\\2.2.0\\microsoft.aspnetcore.http.abstractions.2.2.0.nupkg.sha512",

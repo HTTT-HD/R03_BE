@@ -50,7 +50,7 @@ namespace BECore.API
             var serverMongo = _configuration.GetSection(Constants.AuthConfig.MongoConnection + Constants.AuthConfig.ServerName).Value;
             var hangfireMongoDb = _configuration.GetSection(Constants.AuthConfig.MongoConnection + Constants.AuthConfig.HangfireDb).Value;
 
-            services.AddHangfire(x => x.UseMongoStorage(serverMongo, hangfireMongoDb, options));
+            services.AddHangfire(x => x.UseMongoStorage(serverMongo, hangfireMongoDb));
             services.AddHangfireServer();
             #endregion
 
@@ -124,7 +124,9 @@ namespace BECore.API
             }
 
             #region Hangfire
+#pragma warning disable CS0618 // Type or member is obsolete
             app.UseHangfireServer();
+#pragma warning restore CS0618 // Type or member is obsolete
             app.UseHangfireDashboard("/hangfire");
             BackgroundJob.Enqueue(() => Console.WriteLine("Wellcome to hangfire with mongodb!"));
             #endregion

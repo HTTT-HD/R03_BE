@@ -10,9 +10,11 @@ namespace Application.AuthenticationServices
         Task<ServiceResponse> CreateAsync(IdentityViewModel model);
         Task<ServiceResponse> UpdateAsync(IdentityUpdate model);
         Task<ServiceResponse> GetAll(IdentityRequest request);
+        Task<ServiceResponse> GetAllEs(IdentityRequest request);
         Task<ServiceResponse> GetById(Guid id);
         Task<ServiceResponse> GetUserLogin();
         Task<ServiceResponse> DeleteAsnyc(Guid id);
         Task<ServiceResponse> LoginAction(LoginViewModel model);
+        Task<ServiceResponse> IndexUsers();
     }
 }

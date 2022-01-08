@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "eSztGAsU+CXSK32ekMUYhVRgEpGLtvxBFdN4b2Fy5NrQfqmnccIdAbqJtHmyRfVZWJn1OfI/Bv7F4xfFvQHY0Q==",
+  "dgSpecHash": "wNw/6G3UBPLLlDDIa5/NvVOS8dQxRqsqX0ZLYlwRMXop1Vj2zyYJl5FYZNyQzhWkvtnKZPM2U4mK0SG9rntsGQ==",
   "success": true,
-  "projectFilePath": "E:\\R03_BE\\C#\\BECore\\Common\\Common.csproj",
+  "projectFilePath": "E:\\BECore\\Common\\Common.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\84976\\.nuget\\packages\\microsoft.aspnetcore.http.abstractions\\2.2.0\\microsoft.aspnetcore.http.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\84976\\.nuget\\packages\\microsoft.aspnetcore.http.features\\2.2.0\\microsoft.aspnetcore.http.features.2.2.0.nupkg.sha512",

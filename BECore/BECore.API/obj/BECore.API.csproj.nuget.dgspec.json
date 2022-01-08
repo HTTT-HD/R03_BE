@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\R03_BE\\C#\\BECore\\BECore.API\\BECore.API.csproj": {}
+    "E:\\BECore\\BECore.API\\BECore.API.csproj": {}
   },
   "projects": {
-    "E:\\R03_BE\\C#\\BECore\\Application\\Application.csproj": {
+    "E:\\BECore\\Application\\Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\R03_BE\\C#\\BECore\\Application\\Application.csproj",
+        "projectUniqueName": "E:\\BECore\\Application\\Application.csproj",
         "projectName": "Application",
-        "projectPath": "E:\\R03_BE\\C#\\BECore\\Application\\Application.csproj",
+        "projectPath": "E:\\BECore\\Application\\Application.csproj",
         "packagesPath": "C:\\Users\\84976\\.nuget\\packages\\",
-        "outputPath": "E:\\R03_BE\\C#\\BECore\\Application\\obj\\",
+        "outputPath": "E:\\BECore\\Application\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -31,11 +31,14 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "E:\\R03_BE\\C#\\BECore\\Common\\Common.csproj": {
-                "projectPath": "E:\\R03_BE\\C#\\BECore\\Common\\Common.csproj"
+              "E:\\BECore\\Common\\Common.csproj": {
+                "projectPath": "E:\\BECore\\Common\\Common.csproj"
               },
-              "E:\\R03_BE\\C#\\BECore\\Domain\\Domain.csproj": {
-                "projectPath": "E:\\R03_BE\\C#\\BECore\\Domain\\Domain.csproj"
+              "E:\\BECore\\Domain\\Domain.csproj": {
+                "projectPath": "E:\\BECore\\Domain\\Domain.csproj"
+              },
+              "E:\\BECore\\ElasticSearch\\ElasticSearch.csproj": {
+                "projectPath": "E:\\BECore\\ElasticSearch\\ElasticSearch.csproj"
               }
             }
           }
@@ -53,6 +56,14 @@
             "AutoMapper": {
               "target": "Package",
               "version": "[10.1.1, )"
+            },
+            "Hangfire": {
+              "target": "Package",
+              "version": "[1.7.27, )"
+            },
+            "Hangfire.Mongo": {
+              "target": "Package",
+              "version": "[0.7.27, )"
             },
             "Microsoft.AspNetCore.Http.Abstractions": {
               "target": "Package",
@@ -94,14 +105,14 @@
         }
       }
     },
-    "E:\\R03_BE\\C#\\BECore\\BECore.API\\BECore.API.csproj": {
+    "E:\\BECore\\BECore.API\\BECore.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\R03_BE\\C#\\BECore\\BECore.API\\BECore.API.csproj",
+        "projectUniqueName": "E:\\BECore\\BECore.API\\BECore.API.csproj",
         "projectName": "BECore.API",
-        "projectPath": "E:\\R03_BE\\C#\\BECore\\BECore.API\\BECore.API.csproj",
+        "projectPath": "E:\\BECore\\BECore.API\\BECore.API.csproj",
         "packagesPath": "C:\\Users\\84976\\.nuget\\packages\\",
-        "outputPath": "E:\\R03_BE\\C#\\BECore\\BECore.API\\obj\\",
+        "outputPath": "E:\\BECore\\BECore.API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -121,17 +132,17 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "E:\\R03_BE\\C#\\BECore\\Application\\Application.csproj": {
-                "projectPath": "E:\\R03_BE\\C#\\BECore\\Application\\Application.csproj"
+              "E:\\BECore\\Application\\Application.csproj": {
+                "projectPath": "E:\\BECore\\Application\\Application.csproj"
               },
-              "E:\\R03_BE\\C#\\BECore\\Common\\Common.csproj": {
-                "projectPath": "E:\\R03_BE\\C#\\BECore\\Common\\Common.csproj"
+              "E:\\BECore\\Common\\Common.csproj": {
+                "projectPath": "E:\\BECore\\Common\\Common.csproj"
               },
-              "E:\\R03_BE\\C#\\BECore\\Domain\\Domain.csproj": {
-                "projectPath": "E:\\R03_BE\\C#\\BECore\\Domain\\Domain.csproj"
+              "E:\\BECore\\Domain\\Domain.csproj": {
+                "projectPath": "E:\\BECore\\Domain\\Domain.csproj"
               },
-              "E:\\R03_BE\\C#\\BECore\\Infrastructure.IoC\\Infrastructure.IoC.csproj": {
-                "projectPath": "E:\\R03_BE\\C#\\BECore\\Infrastructure.IoC\\Infrastructure.IoC.csproj"
+              "E:\\BECore\\Infrastructure.IoC\\Infrastructure.IoC.csproj": {
+                "projectPath": "E:\\BECore\\Infrastructure.IoC\\Infrastructure.IoC.csproj"
               }
             }
           }
@@ -146,18 +157,6 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
-            "Dapper": {
-              "target": "Package",
-              "version": "[2.0.123, )"
-            },
-            "Hangfire": {
-              "target": "Package",
-              "version": "[1.7.27, )"
-            },
-            "Hangfire.Mongo": {
-              "target": "Package",
-              "version": "[0.7.27, )"
-            },
             "Microsoft.AspNetCore.Authentication": {
               "target": "Package",
               "version": "[2.2.0, )"
@@ -176,10 +175,6 @@
               "target": "Package",
               "version": "[5.0.12, )"
             },
-            "Microsoft.EntityFrameworkCore.SqlServer": {
-              "target": "Package",
-              "version": "[5.0.12, )"
-            },
             "Microsoft.Extensions.Configuration.Json": {
               "target": "Package",
               "version": "[6.0.0, )"
@@ -188,17 +183,9 @@
               "target": "Package",
               "version": "[5.13.0, )"
             },
-            "StackExchange.Redis": {
-              "target": "Package",
-              "version": "[2.2.88, )"
-            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[5.6.3, )"
-            },
-            "System.Data.SqlClient": {
-              "target": "Package",
-              "version": "[4.8.3, )"
             }
           },
           "imports": [
@@ -223,14 +210,14 @@
         }
       }
     },
-    "E:\\R03_BE\\C#\\BECore\\Common\\Common.csproj": {
+    "E:\\BECore\\Common\\Common.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\R03_BE\\C#\\BECore\\Common\\Common.csproj",
+        "projectUniqueName": "E:\\BECore\\Common\\Common.csproj",
         "projectName": "Common",
-        "projectPath": "E:\\R03_BE\\C#\\BECore\\Common\\Common.csproj",
+        "projectPath": "E:\\BECore\\Common\\Common.csproj",
         "packagesPath": "C:\\Users\\84976\\.nuget\\packages\\",
-        "outputPath": "E:\\R03_BE\\C#\\BECore\\Common\\obj\\",
+        "outputPath": "E:\\BECore\\Common\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -290,14 +277,14 @@
         }
       }
     },
-    "E:\\R03_BE\\C#\\BECore\\Domain\\Domain.csproj": {
+    "E:\\BECore\\Domain\\Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\R03_BE\\C#\\BECore\\Domain\\Domain.csproj",
+        "projectUniqueName": "E:\\BECore\\Domain\\Domain.csproj",
         "projectName": "Domain",
-        "projectPath": "E:\\R03_BE\\C#\\BECore\\Domain\\Domain.csproj",
+        "projectPath": "E:\\BECore\\Domain\\Domain.csproj",
         "packagesPath": "C:\\Users\\84976\\.nuget\\packages\\",
-        "outputPath": "E:\\R03_BE\\C#\\BECore\\Domain\\obj\\",
+        "outputPath": "E:\\BECore\\Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -317,8 +304,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "E:\\R03_BE\\C#\\BECore\\Common\\Common.csproj": {
-                "projectPath": "E:\\R03_BE\\C#\\BECore\\Common\\Common.csproj"
+              "E:\\BECore\\Common\\Common.csproj": {
+                "projectPath": "E:\\BECore\\Common\\Common.csproj"
               }
             }
           }
@@ -357,14 +344,14 @@
         }
       }
     },
-    "E:\\R03_BE\\C#\\BECore\\Infrastructure.IoC\\Infrastructure.IoC.csproj": {
+    "E:\\BECore\\ElasticSearch\\ElasticSearch.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\R03_BE\\C#\\BECore\\Infrastructure.IoC\\Infrastructure.IoC.csproj",
-        "projectName": "Infrastructure.IoC",
-        "projectPath": "E:\\R03_BE\\C#\\BECore\\Infrastructure.IoC\\Infrastructure.IoC.csproj",
+        "projectUniqueName": "E:\\BECore\\ElasticSearch\\ElasticSearch.csproj",
+        "projectName": "ElasticSearch",
+        "projectPath": "E:\\BECore\\ElasticSearch\\ElasticSearch.csproj",
         "packagesPath": "C:\\Users\\84976\\.nuget\\packages\\",
-        "outputPath": "E:\\R03_BE\\C#\\BECore\\Infrastructure.IoC\\obj\\",
+        "outputPath": "E:\\BECore\\ElasticSearch\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -384,11 +371,82 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "E:\\R03_BE\\C#\\BECore\\Application\\Application.csproj": {
-                "projectPath": "E:\\R03_BE\\C#\\BECore\\Application\\Application.csproj"
+              "E:\\BECore\\Common\\Common.csproj": {
+                "projectPath": "E:\\BECore\\Common\\Common.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "dependencies": {
+            "Elasticsearch.Net": {
+              "target": "Package",
+              "version": "[7.16.0, )"
+            },
+            "NEST": {
+              "target": "Package",
+              "version": "[7.16.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "E:\\BECore\\Infrastructure.IoC\\Infrastructure.IoC.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "E:\\BECore\\Infrastructure.IoC\\Infrastructure.IoC.csproj",
+        "projectName": "Infrastructure.IoC",
+        "projectPath": "E:\\BECore\\Infrastructure.IoC\\Infrastructure.IoC.csproj",
+        "packagesPath": "C:\\Users\\84976\\.nuget\\packages\\",
+        "outputPath": "E:\\BECore\\Infrastructure.IoC\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\84976\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {
+              "E:\\BECore\\Application\\Application.csproj": {
+                "projectPath": "E:\\BECore\\Application\\Application.csproj"
               },
-              "E:\\R03_BE\\C#\\BECore\\Domain\\Domain.csproj": {
-                "projectPath": "E:\\R03_BE\\C#\\BECore\\Domain\\Domain.csproj"
+              "E:\\BECore\\Domain\\Domain.csproj": {
+                "projectPath": "E:\\BECore\\Domain\\Domain.csproj"
               }
             }
           }
