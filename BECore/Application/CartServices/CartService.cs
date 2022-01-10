@@ -34,7 +34,7 @@ namespace Application.CartServices
             bson.Add(nameof(GioHang.CreateBy), _userId.ToString());
             bson.Add(nameof(GioHang.CuaHangId), model.CuaHangId.ToString());
             var gioHang = await _repository.FirsOfDefaultAsync<GioHang>(bson);
-            var thanhTien = model.SoLuong * sanPham.SoLuong;
+            var thanhTien = model.SoLuong * sanPham.DonGia;
             if(gioHang == null)
             {
                 gioHang = new GioHang()
@@ -128,7 +128,7 @@ namespace Application.CartServices
 
                 gioHang.TongTien -= chiTiet.ThanhTien;
                 gioHang.TongSoLuong -= chiTiet.SoLuong;
-
+                gioHang.ChiTiets.Remove(chiTiet);
                 await _repository.UpdateAsnyc<GioHang>(gioHang.Id.ToString(), gioHang);
             }
             return Ok(gioHang);
@@ -146,7 +146,6 @@ namespace Application.CartServices
             bson.Add(nameof(GioHang.CreateBy), _userId.ToString());
             bson.Add(nameof(GioHang.CuaHangId), model.CuaHangId.ToString());
             var gioHang = await _repository.FirsOfDefaultAsync<GioHang>(bson);
-            var thanhTien = model.SoLuong * sanPham.SoLuong;
 
             if (gioHang == null) return NotFound(Constants.CodeError.NotFound, Constants.MessageResponse.NotFound);
             if (gioHang.ChiTiets == null || !gioHang.ChiTiets.Any())
@@ -157,11 +156,12 @@ namespace Application.CartServices
 
             var soLuong = model.SoLuong - chiTiet.SoLuong;
             var tongTien = soLuong * sanPham.DonGia;
-            chiTiet.ThanhTien += tongTien;
+            chiTiet.ThanhTien = model.SoLuong * sanPham.DonGia;
             chiTiet.SoLuong = model.SoLuong;
             gioHang.TongTien += tongTien;
             gioHang.TongSoLuong += soLuong;
 
+            await _repository.UpdateAsnyc<GioHang>(gioHang.Id.ToString(), gioHang);
             var result = new ChangeQuantityProductResponse()
             {
                 ThanhTien = chiTiet.ThanhTien,
@@ -186,10 +186,10 @@ namespace Application.CartServices
             };
             if (gioHang == null || gioHang.ChiTiets == null || !gioHang.ChiTiets.Any()) return Ok(result);
 
-            var sanPhamIds = gioHang.ChiTiets.Select(x => x.SanPhamId).ToList();
-            bson = new BsonDocument();
-            bson.Add(nameof(SanPham.Id), new BsonDocument("$in", new BsonArray(sanPhamIds)));
-            var sanPhams = await _repository.FindAllAsync<SanPham>(bson);
+            var sanPhamIds = gioHang.ChiTiets.Select(x => x.SanPhamId.ToString()).ToList();
+            var bson2 = new BsonDocument();
+            bson2.Add("_id", new BsonDocument("$in", new BsonArray(sanPhamIds)));
+            var sanPhams = await _repository.FindAllAsync<SanPham>(bson2);
             if(sanPhams != null && !sanPhams.Any()) return Ok(result);
 
             result.TongTien = gioHang.TongTien;

@@ -21,8 +21,4 @@
     <ProjectReference Include="..\ElasticSearch\ElasticSearch.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="OrderServices\" />
-  </ItemGroup>
-
 </Project>

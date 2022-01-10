@@ -40,8 +40,8 @@ namespace BECore.API.Controllers
             return await _service.Delete(id);
         }
 
-        [HttpPost("get-all")]
-        public async Task<ServiceResponse> GetAll(StoreRequest request)
+        [HttpGet("get-all")]
+        public async Task<ServiceResponse> GetAll([FromQuery]StoreRequest request)
         {
             return await _service.GetAll(request);
         }

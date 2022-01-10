@@ -33,8 +33,8 @@ namespace BECore.API.Controllers
             return await _service.UpdateAsync(model);
         }
 
-        [HttpPost("get-all")]
-        public async Task<ServiceResponse> GetAll(IdentityRequest request)
+        [HttpGet("get-all")]
+        public async Task<ServiceResponse> GetAll([FromQuery] IdentityRequest request)
         {
             return await _service.GetAll(request);
         }
@@ -57,6 +57,7 @@ namespace BECore.API.Controllers
             return await _service.DeleteAsnyc(id);
         }
 
+        [AllowAnonymous]
         [HttpPost("login")]
         public async Task<ServiceResponse> LoginAction(LoginViewModel model)
         {

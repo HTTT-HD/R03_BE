@@ -28,8 +28,8 @@ namespace BECore.API.Controllers
             return await _service.AddOrUpdate(model);
         }
 
-        [HttpPost("get-all")]
-        public async Task<ServiceResponse> GetAll(RoleRequest model)
+        [HttpGet("get-all")]
+        public async Task<ServiceResponse> GetAll([FromQuery] RoleRequest model)
         {
             return await _service.GetAll(model);
         }

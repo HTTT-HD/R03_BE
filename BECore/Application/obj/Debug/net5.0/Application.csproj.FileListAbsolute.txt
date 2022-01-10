@@ -34,6 +34,8 @@ D:\project\Freelancer\BECore\Application\obj\Debug\net5.0\ref\Application.dll
 D:\project\Freelancer\BECore\Application\obj\Debug\net5.0\Application.pdb
 E:\Freelancer\React\BECore\Application\bin\Debug\net5.0\ElasticSearch.dll
 E:\Freelancer\React\BECore\Application\bin\Debug\net5.0\ElasticSearch.pdb
+D:\project\Freelancer\BECore\Application\bin\Debug\net5.0\ElasticSearch.dll
+D:\project\Freelancer\BECore\Application\bin\Debug\net5.0\ElasticSearch.pdb
 E:\BECore\Application\bin\Debug\net5.0\Application.deps.json
 E:\BECore\Application\bin\Debug\net5.0\Application.dll
 E:\BECore\Application\bin\Debug\net5.0\ref\Application.dll

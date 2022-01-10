@@ -12,4 +12,15 @@ namespace Common.Enums
         Nam = 2,
     }
 
+    public enum enumStatus
+    {
+        [Display(Name = "Huỷ đơn")]
+        HuyDon = -1,
+        [Display(Name = "Nhận đơn")]
+        NhanDon = 0,
+        [Display(Name = "Đang giao")]
+        DangGiao = 1,
+        [Display(Name = "Đã giao")]
+        DaGiao = 2
+    }
 }

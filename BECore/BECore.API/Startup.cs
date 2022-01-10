@@ -128,7 +128,7 @@ namespace BECore.API
             app.UseHangfireServer();
 #pragma warning restore CS0618 // Type or member is obsolete
             app.UseHangfireDashboard("/hangfire");
-            BackgroundJob.Enqueue(() => Console.WriteLine("Wellcome to hangfire with mongodb!"));
+            
             #endregion
 
             app.UseCors(x => x

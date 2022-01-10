@@ -38,6 +38,8 @@ D:\project\Freelancer\BECore\Infrastructure.IoC\obj\Debug\net5.0\ref\Infrastruct
 D:\project\Freelancer\BECore\Infrastructure.IoC\obj\Debug\net5.0\Infrastructure.IoC.pdb
 E:\Freelancer\React\BECore\Infrastructure.IoC\bin\Debug\net5.0\ElasticSearch.dll
 E:\Freelancer\React\BECore\Infrastructure.IoC\bin\Debug\net5.0\ElasticSearch.pdb
+D:\project\Freelancer\BECore\Infrastructure.IoC\bin\Debug\net5.0\ElasticSearch.dll
+D:\project\Freelancer\BECore\Infrastructure.IoC\bin\Debug\net5.0\ElasticSearch.pdb
 E:\BECore\Infrastructure.IoC\bin\Debug\net5.0\Infrastructure.IoC.deps.json
 E:\BECore\Infrastructure.IoC\bin\Debug\net5.0\Infrastructure.IoC.dll
 E:\BECore\Infrastructure.IoC\bin\Debug\net5.0\ref\Infrastructure.IoC.dll

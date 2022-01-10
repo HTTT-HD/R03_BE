@@ -2,10 +2,10 @@
 
 using Common.ViewModels.Authentication;
 using Common.ViewModels.Category;
+using Common.ViewModels.Order;
+using Common.ViewModels.Product;
 using Common.ViewModels.Store;
-
 using Domain.Models;
-using System.Collections.Generic;
 
 namespace Application.MapProfiles
 {
@@ -18,6 +18,9 @@ namespace Application.MapProfiles
             CreateMap<ThanhVien, UserESViewModel>(); 
             CreateMap<StoreViewModel, CuaHang>();
             CreateMap<CategoryViewModel, DanhMuc>();
+            CreateMap<ProductViewModel, SanPham>();
+            CreateMap<DonHang, OrderDetail>();
+            CreateMap<ChiTietDonHang, ChiTiet>();
         }
     }
 }

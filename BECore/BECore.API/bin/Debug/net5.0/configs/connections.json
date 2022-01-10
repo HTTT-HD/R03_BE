@@ -1,8 +1,8 @@
 {
   "MongodbConnectionStrings": {
     // mongodb+srv://admin1:Trn1401@cluster0.218zm.mongodb.net
-    "ServerName": "mongodb://localhost:27017",
-    "DatabaseName": "webdichoonline",
+    "ServerName": "mongodb+srv://admin1:Trn1401@cluster0.218zm.mongodb.net", //mongodb://localhost:27017,
+    "DatabaseName": "dichoho", //webdichoonline,
     "HangfireDb": "hangfire_db"
   }
 }

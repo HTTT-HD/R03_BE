@@ -13,6 +13,8 @@ using Application.StoreServices;
 using Application.CategoryServices;
 using Application.ProductServices;
 using Application.CartServices;
+using Application.OrderServices;
+using Application.FileServices;
 
 namespace Infrastructure.IoC
 {
@@ -37,6 +39,8 @@ namespace Infrastructure.IoC
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<ICartService, CartService>();
+            services.AddScoped<IOrderService, OrderService>();
+            services.AddScoped<IUploadFileService, UploadFileService>();
 
 
             services.AddScoped<IElasticSearchRepository, ElasticSearchRepository>();

@@ -23,7 +23,8 @@ namespace Common.Helpers
             public const string ServerName = "ServerName";
             public const string FolderFileDefault = "documents";
             public const string SaltConfig = "Y5w6DlvKJCSsIl%Gp*4gBtgpMnNY987s8AX&jt3Sb1LSpT21KS%ApSf7bJk*3f!EPrHNn&KQoaop8zoeL@4s*Edrx9^z4aryEHL";
-
+            public const int Store = 5;
+            public const int Shiper = 5;
         }
 
         public static class MessageResponse
