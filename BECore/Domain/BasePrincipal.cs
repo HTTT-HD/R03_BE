@@ -10,6 +10,7 @@ namespace Domain
         protected string _permission;
         protected string _hoTen;
         protected string _userName;
+        protected string[] _cuaHangIds;
 
         public BasePrincipal(IHttpContextAccessor httpContextAccessor)
         {
@@ -17,6 +18,7 @@ namespace Domain
             _permission = httpContextAccessor.HttpContext.GetPermission();
             _hoTen = httpContextAccessor.HttpContext.GetFullName();
             _userName = httpContextAccessor.HttpContext.GetUserName();
+            _cuaHangIds = httpContextAccessor.HttpContext.GetStore();
         }
     }
 }

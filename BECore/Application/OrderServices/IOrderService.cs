@@ -10,9 +10,11 @@ namespace Application.OrderServices
     {
         Task<ServiceResponse> Order(OrderViewModel model);
         Task<ServiceResponse> RejectOrder(Guid donHangId);
+        Task<ServiceResponse> ReceiveOrder(Guid donHangId);
         Task<ServiceResponse> TransportOrder(Guid donHangId);
         Task<ServiceResponse> FinishOrder(Guid donHangId);
         Task<ServiceResponse> GetAll(OrderRequest request);
+        Task<ServiceResponse> GetAllForUser(OrderRequest request);
         Task<ServiceResponse> OrderDetail(Guid donHangId);
         Task<ServiceResponse> Dashboard(string tuNgay, string denNgay);
     }

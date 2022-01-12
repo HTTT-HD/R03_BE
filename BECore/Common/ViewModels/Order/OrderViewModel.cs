@@ -1,4 +1,6 @@
 ﻿using Common.Enums;
+using Common.Helpers;
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -7,7 +9,6 @@ namespace Common.ViewModels.Order
 {
     public class OrderViewModel
     {
-        public Guid ThanhVienId { get; set; }
         [Required, MaxLength(255)]
         public string NguoiDat { get; set; }
         [Required, MaxLength(12), Phone]
@@ -16,17 +17,18 @@ namespace Common.ViewModels.Order
         public string DiaChiNhan { get; set; }
         [Required]
         public Guid CuaHangId { get; set; }
+        public enumPayment LoaiThanhToan { get; set; }
     }
 
     public class OrderRequest : PageFilter
     {
-        public bool IsUser { get; set; }
         public string NguoiDat { get; set; }
         public string SoDienThoai { get; set; }
         public string DiaChiNhan { get; set; }
         public string TenCuaHang { get; set; }
         public Guid? CuaHangId { get; set; }
         public enumStatus? TrangThai { get; set; }
+        public enumPayment? LoaiThanhToan { get; set; }
         public int? TongSoLuong { get; set; }
         public long? TongTien { get; set; }
         public string TuNgay { get; set; }
@@ -47,6 +49,10 @@ namespace Common.ViewModels.Order
         public string TenCuaHang { get; set; }
         public enumStatus TrangThai { get; set; }
         public string TenTrangThai { get; set; }
+
+        public enumPayment LoaiThanhToan { get; set; }
+        public string TenLoaiThanhToan { get; set; }
+
         public int TongSoLuong { get; set; }
         public long TongTien { get; set; }
         public long TienShip { get; set; }

@@ -246,9 +246,9 @@ D:\project\Freelancer\BECore\BECore.API\bin\Debug\net5.0\ElasticSearch.pdb
 E:\BECore\BECore.API\bin\Debug\net5.0\appsettings.Development.json
 E:\BECore\BECore.API\bin\Debug\net5.0\appsettings.json
 E:\BECore\BECore.API\bin\Debug\net5.0\configs\commonApp.json
+E:\BECore\BECore.API\bin\Debug\net5.0\configs\connections.json
 E:\BECore\BECore.API\bin\Debug\net5.0\configs\jwt.json
 E:\BECore\BECore.API\bin\Debug\net5.0\configs\redis.json
-E:\BECore\BECore.API\bin\Debug\net5.0\configs\connections.json
 E:\BECore\BECore.API\bin\Debug\net5.0\BECore.API.exe
 E:\BECore\BECore.API\bin\Debug\net5.0\BECore.API.deps.json
 E:\BECore\BECore.API\bin\Debug\net5.0\BECore.API.runtimeconfig.json

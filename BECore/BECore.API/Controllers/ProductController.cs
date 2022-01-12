@@ -1,7 +1,6 @@
 ﻿using Application.ProductServices;
 using Common.Utils;
 using Common.ViewModels.Product;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
@@ -19,7 +18,6 @@ namespace BECore.API.Controllers
             _service = service;
         }
 
-        [Authorize]
         [HttpPost("create-or-update")]
         public async Task<ServiceResponse> AddOrUpdate(ProductViewModel model)
         {
@@ -31,7 +29,6 @@ namespace BECore.API.Controllers
             return await _service.GetById(id);
         }
 
-        [Authorize]
         [HttpDelete("delete")]
         public async Task<ServiceResponse> Delete(Guid id)
         {

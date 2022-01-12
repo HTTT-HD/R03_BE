@@ -29,9 +29,12 @@ namespace Application.CategoryServices
 
         public async Task<ServiceResponse> AddOrUpdate(CategoryViewModel model)
         {
+            if(!_permission.checkAdminNguoiBanHang())
+                return Unauthorized(Constants.CodeError.Unauthorized, Constants.MessageResponse.Unauthorized);
+
             if (model.Id == null || model.Id == Guid.Empty)
             {
-                var entity = _mapper.Map<DanhMuc>(model); 
+                var entity = _mapper.Map<DanhMuc>(model);
                 await _repository.AddAsync<DanhMuc>(entity);
                 return Created(entity);
             }
@@ -59,11 +62,20 @@ namespace Application.CategoryServices
 
         public async Task<ServiceResponse> Delete(Guid id)
         {
+            if (!_permission.checkAdminNguoiBanHang())
+                return Unauthorized(Constants.CodeError.Unauthorized, Constants.MessageResponse.Unauthorized);
+
             var entity = await _repository.GetById<DanhMuc>(id.ToString());
             if (entity == null) return NotFound(Constants.CodeError.NotFound, Constants.MessageResponse.NotFound);
+
+            if(entity.CreateBy.ToLowerString() != _userId.ToLowerString()) 
+                return Unauthorized(Constants.CodeError.Unauthorized, Constants.MessageResponse.Unauthorized);
+
             BackgroundJob.Enqueue(() => DeleteLogicProduc(id));
-            await _repository.DeleteAsync<DanhMuc>(id.ToString(), entity);
+            entity.IsDeleted = true;
+            await _repository.UpdateAsnyc<DanhMuc>(id.ToString(), entity);
             return Ok(entity);
+
         }
 
         public async Task<ServiceResponse> GetAll(CategoryRequest request)

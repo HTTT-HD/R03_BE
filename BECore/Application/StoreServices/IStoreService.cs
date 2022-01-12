@@ -12,5 +12,6 @@ namespace Application.StoreServices
         Task<ServiceResponse> GetById(Guid id);
         Task<ServiceResponse> Delete(Guid id);
         Task<ServiceResponse> GetAll(StoreRequest request);
+        Task<ServiceResponse> GetAllForUser(StoreRequest request);
     }
 }

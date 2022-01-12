@@ -32,6 +32,12 @@ namespace BECore.API.Controllers
             return await _service.RejectOrder(donHangId);
         }
 
+        [HttpPut("receive")]
+        public async Task<ServiceResponse> ReceiveOrder(Guid donHangId)
+        {
+            return await _service.ReceiveOrder(donHangId);
+        }
+
         [HttpPut("transport")]
         public async Task<ServiceResponse> TransportOrder(Guid donHangId)
         {
@@ -48,6 +54,12 @@ namespace BECore.API.Controllers
         public async Task<ServiceResponse> GetAll([FromQuery] OrderRequest request)
         {
             return await _service.GetAll(request);
+        }
+
+        [HttpGet("get-all-for-user")]
+        public async Task<ServiceResponse> GetAllForUser([FromQuery] OrderRequest request)
+        {
+            return await _service.GetAllForUser(request);
         }
 
         [HttpGet("detail")]

@@ -1,12 +1,7 @@
 ﻿using Application.CategoryServices;
-
 using Common.Utils;
 using Common.ViewModels.Category;
-
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-
 using System;
 using System.Threading.Tasks;
 
@@ -22,8 +17,7 @@ namespace BECore.API.Controllers
         {
             _service = service;
         }
-
-        [Authorize]
+        
         [HttpPost("create-or-update")]
         public async Task<ServiceResponse> AddOrUpdate(CategoryViewModel model)
         {
@@ -36,7 +30,7 @@ namespace BECore.API.Controllers
             return await _service.GetById(id);
         }
 
-        [Authorize]
+        //[Authorize(Roles = Constants.Permission.AdminAndBanHang)]
         [HttpDelete("delete")]
         public async Task<ServiceResponse> Delete(Guid id)
         {

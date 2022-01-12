@@ -49,5 +49,11 @@ namespace BECore.API.Controllers
         {
             return await _service.GetAll(cuaHangId);
         }
+
+        [HttpGet("products-in-cart")]
+        public async Task<ServiceResponse> GetProductsCart(Guid gioHangId)
+        {
+            return await _service.GetProductsInCart(gioHangId);
+        }
     }
 }

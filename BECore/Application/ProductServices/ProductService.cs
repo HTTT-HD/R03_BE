@@ -7,8 +7,11 @@ using Common.ViewModels.Product;
 using Domain;
 using Domain.Models;
 using Domain.Repositories;
+
 using Microsoft.AspNetCore.Http;
+
 using MongoDB.Bson;
+
 using System;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -28,12 +31,15 @@ namespace Application.ProductServices
 
         public async Task<ServiceResponse> AddOrUpdate(ProductViewModel model)
         {
-            var danhMuc = await _repository.GetById<DanhMuc>(model.DanhMucId.ToString());
-            if(danhMuc == null) return NotFound(Constants.CodeError.NotFound, Constants.MessageResponse.NotFound);
-            var cuaHang = await _repository.GetById<CuaHang>(model.CuaHangId.ToString());
-            if(cuaHang == null) return NotFound(Constants.CodeError.NotFound, Constants.MessageResponse.NotFound);
+            if (!_permission.checkAdminNguoiBanHang())
+                return Unauthorized(Constants.CodeError.Unauthorized, Constants.MessageResponse.Unauthorized);
 
-            if(model.Id == null || model.Id == Guid.Empty)
+            var danhMuc = await _repository.GetById<DanhMuc>(model.DanhMucId.ToString());
+            if (danhMuc == null) return NotFound(Constants.CodeError.NotFound, Constants.MessageResponse.NotFound);
+            var cuaHang = await _repository.GetById<CuaHang>(model.CuaHangId.ToString());
+            if (cuaHang == null) return NotFound(Constants.CodeError.NotFound, Constants.MessageResponse.NotFound);
+
+            if (model.Id == null || model.Id == Guid.Empty)
             {
                 var entity = _mapper.Map<SanPham>(model);
                 entity.TenCuaHang = cuaHang.TenCuaHang;
@@ -44,7 +50,7 @@ namespace Application.ProductServices
             else
             {
                 var entity = await _repository.GetById<SanPham>(model.Id.ToString());
-                if(entity == null) return NotFound(Constants.CodeError.NotFound, Constants.MessageResponse.NotFound);
+                if (entity == null) return NotFound(Constants.CodeError.NotFound, Constants.MessageResponse.NotFound);
 
                 entity = entity.SanPham(model);
                 entity.TenCuaHang = cuaHang.TenCuaHang;
@@ -63,9 +69,17 @@ namespace Application.ProductServices
 
         public async Task<ServiceResponse> Delete(Guid id)
         {
+            if (!_permission.checkAdminNguoiBanHang())
+                return Unauthorized(Constants.CodeError.Unauthorized, Constants.MessageResponse.Unauthorized);
+
             var entity = await _repository.GetById<SanPham>(id.ToString());
             if (entity == null) return NotFound(Constants.CodeError.NotFound, Constants.MessageResponse.NotFound);
-            await _repository.DeleteAsync<SanPham>(id.ToString(), entity);
+
+            if(entity.CreateBy.ToLowerString() != _userId.ToLowerString())
+                return Unauthorized(Constants.CodeError.Unauthorized, Constants.MessageResponse.Unauthorized);
+
+            entity.IsDeleted = true;
+            await _repository.UpdateAsnyc<SanPham>(id.ToString(), entity);
             return Ok(entity);
         }
 

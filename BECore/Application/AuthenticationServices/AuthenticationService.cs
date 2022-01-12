@@ -141,7 +141,8 @@ namespace Application.AuthenticationServices
         {
             var thanhVien = await _mongoRepository.GetById<ThanhVien>(id.ToString());
             if (thanhVien == null) return NotFound(Constants.CodeError.NotFound, Constants.MessageResponse.NotFound);
-            await _mongoRepository.DeleteAsync<ThanhVien>(id.ToString(), thanhVien);
+            thanhVien.IsDeleted = true;
+            await _mongoRepository.UpdateAsnyc<ThanhVien>(id.ToString(), thanhVien);
             return Ok(true);
         }
 
@@ -153,8 +154,16 @@ namespace Application.AuthenticationServices
             {
                 return BadRequest(Constants.CodeError.NotFound, Constants.MessageResponse.LoginFailed);
             }
+            var bson = new BsonDocument();
+            bson.Add(nameof(CuaHang.ThanhVienId), user.Id.ToString());
+            var cuaHang = await _mongoRepository.FindAllAsync<CuaHang>(bson);
+            var cuaHangIds = string.Empty;
+            if(cuaHang != null && cuaHang.Any())
+            {
+                cuaHangIds = string.Join(",", cuaHang.Select(x => x.Id));
+            }
 
-            var permissions = new List<Quyen>();
+             var permissions = new List<Quyen>();
             var roles = await _mongoRepository.FindAllAsync<Vaitro>(x => x.ThanhViens != null && x.ThanhViens.Any(x => x == user.Id));
             if(roles != null && roles.Any())
             {
@@ -191,6 +200,11 @@ namespace Application.AuthenticationServices
                 var roleCode = string.Join(',', permissions.Select(x => x.Ma));
                 authClaims.Add(new Claim(ClaimTypes.Role, roleCode ?? string.Empty));
             }
+            if (!string.IsNullOrWhiteSpace(cuaHangIds))
+            {
+                authClaims.Add(new Claim(Constants.Principal.Store, cuaHangIds));
+            }
+
             var secret = _configuration.GetSection("JwtOptions:Secret")?.Value;
             var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret));
             var token = new JwtSecurityToken(
@@ -200,7 +214,6 @@ namespace Application.AuthenticationServices
                 claims: authClaims,
                 signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
              );
-
             result.AcessToken = new JwtSecurityTokenHandler().WriteToken(token);
             result.Expiration = token.ValidTo;
 

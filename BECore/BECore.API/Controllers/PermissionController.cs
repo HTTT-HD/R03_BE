@@ -1,7 +1,7 @@
 ﻿using Application.PermissionServices;
 using Common.Utils;
 using Common.ViewModels.Permission;
-
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -9,6 +9,7 @@ namespace BECore.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class PermissionController : ControllerBase
     {
         private readonly IPermissionService _service;

@@ -21,11 +21,13 @@ namespace Common.ViewModels.Cart
 
     public class CartViewModel
     {
-        public Guid CuaHangId { get; set; }
+        public Guid? GioHangId { get; set; }
+        public Guid? CuaHangId { get; set; }
         public int TongSoLuong { get; set; }
         public long TongTien { get; set; }
         public IEnumerable<ProductsInCart> Products { get; set; }
     }
+
 
     public class ProductsInCart
     {

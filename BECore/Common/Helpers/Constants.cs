@@ -45,6 +45,7 @@ namespace Common.Helpers
             public const string LoginFailed = "Tài khoản hoặc mật khẩu không chính xác!";
             public const string LoginSuccessfully = "Đăng nhập thành công!";
             public const string NotEnough = "Số lượng sản phẩm không đủ!";
+            public const string Unauthorized = "Bạn không có quyền!";
 
         }
         public static class CodeError
@@ -58,6 +59,7 @@ namespace Common.Helpers
             public const string NotStatus = "G007";
             public const string Conflict = "G008";
             public const string NotEnough = "G008";
+            public const string Unauthorized = "G009";
         }
 
         public static class Principal
@@ -66,13 +68,14 @@ namespace Common.Helpers
             public const string HoTen = "HoTen";
             public const string UserId = "UserId";
             public const string SoDienThoai = "SoDienThoai";
+            public const string Store = "store";
         }
 
         public static class Permission
         {
             public const string Admin = "admin";
-            public const string NguoiBanHang = "ban-hang";
-            public const string NguoiGiaoHang = "giao-hang";
+            public const string NguoiBanHang = "banhang";
+            public const string NguoiGiaoHang = "giaohang";
         }
     }
 }

@@ -39,6 +39,6 @@ namespace Domain.Repositories
         Task<bool> AnyAsync<TEntity>(BsonDocument bsons) where TEntity : class;
         Task<bool> AnyLiqnAsync<TEntity>(Expression<Func<TEntity, bool>> filter = null) where TEntity : class;
         Task Remove<TEntity>(string id) where TEntity : class;
-        Task DeleteAsync<TEntity>(string id, TEntity entity) where TEntity : class;
+        //Task DeleteAsync<TEntity>(string id, TEntity entity) where TEntity : class;
     }
 }

@@ -14,5 +14,6 @@ namespace Application.CartServices
         Task<ServiceResponse> RemoveProduct(Guid cuaHangId, Guid sanPhamId);
         Task<ServiceResponse> ChangeQuantity(AddProductToCart model);
         Task<ServiceResponse> GetAll(Guid cuaHangId);
+        Task<ServiceResponse> GetProductsInCart(Guid gioHangId);
     }
 }

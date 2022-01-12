@@ -19,8 +19,7 @@ namespace BECore.API.Controllers
         {
             _service = service;
         }
-
-        [Authorize]
+        
         [HttpPost("create-or-update")]
         public async Task<ServiceResponse> AddOrUpdate(StoreViewModel model)
         {
@@ -31,9 +30,8 @@ namespace BECore.API.Controllers
         public async Task<ServiceResponse> GetById(Guid id)
         {
             return await _service.GetById(id);
-        } 
+        }
 
-        [Authorize]
         [HttpDelete("delete")]
         public async Task<ServiceResponse> Delete(Guid id)
         {
@@ -44,6 +42,12 @@ namespace BECore.API.Controllers
         public async Task<ServiceResponse> GetAll([FromQuery]StoreRequest request)
         {
             return await _service.GetAll(request);
+        }
+
+        [HttpGet("get-all-for-user")]
+        public async Task<ServiceResponse> GetAllForUser([FromQuery] StoreRequest request)
+        {
+            return await _service.GetAllForUser(request);
         }
     }
 }

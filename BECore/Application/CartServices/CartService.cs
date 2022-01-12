@@ -53,7 +53,7 @@ namespace Application.CartServices
                     }
                 };
                 await _repository.AddAsync<GioHang>(gioHang);
-                return Ok(true);
+                return Ok(gioHang);
             }
             else
             {
@@ -77,7 +77,7 @@ namespace Application.CartServices
                     
                     gioHang.ChiTiets.Add(chiTiet);
                     await _repository.UpdateAsnyc<GioHang>(gioHang.Id.ToString(), gioHang);
-                    return Ok(true);
+                    return Ok(gioHang);
                 }
                 else
                 {
@@ -87,11 +87,9 @@ namespace Application.CartServices
                     chiTiet.SoLuong += model.SoLuong;
                     chiTiet.ThanhTien += thanhTien;
                     await _repository.UpdateAsnyc<GioHang>(gioHang.Id.ToString(), gioHang);
-                    return Ok(true);
+                    return Ok(gioHang);
                 }
             }
-
-            
         }
 
         public async Task<ServiceResponse> RemoveGioHang(Guid cuaHangId)
@@ -180,6 +178,7 @@ namespace Application.CartServices
             var result = new CartViewModel()
             {
                 CuaHangId = cuaHangId,
+                GioHangId = gioHang?.Id,
                 TongSoLuong = 0,
                 TongTien = 0,
                 Products = new List<ProductsInCart>()
@@ -204,6 +203,41 @@ namespace Application.CartServices
                              TenSanPham = sp?.TenSanPham,
                              ThanhTien = ct.ThanhTien
                          };
+
+            return Ok(result);
+        }
+
+        public async Task<ServiceResponse> GetProductsInCart(Guid gioHangId)
+        {
+            var gioHang = await _repository.GetById<GioHang>(gioHangId.ToString());
+            var result = new CartViewModel()
+            {
+                GioHangId = gioHangId,
+                CuaHangId = gioHang?.CuaHangId,
+                TongSoLuong = 0,
+                TongTien = 0,
+                Products = new List<ProductsInCart>()
+            };
+            if (gioHang == null || gioHang.ChiTiets == null || !gioHang.ChiTiets.Any()) return Ok(result);
+
+            var sanPhamIds = gioHang.ChiTiets.Select(x => x.SanPhamId.ToString()).ToList();
+            var bson2 = new BsonDocument();
+            bson2.Add("_id", new BsonDocument("$in", new BsonArray(sanPhamIds)));
+            var sanPhams = await _repository.FindAllAsync<SanPham>(bson2);
+            if (sanPhams != null && !sanPhams.Any()) return Ok(result);
+
+            result.TongTien = gioHang.TongTien;
+            result.TongSoLuong = gioHang.TongSoLuong;
+
+            result.Products = from ct in gioHang.ChiTiets
+                              join sp in sanPhams on ct.SanPhamId equals sp.Id
+                              select new ProductsInCart()
+                              {
+                                  SanPhamId = ct.SanPhamId,
+                                  SoLuong = ct.SoLuong,
+                                  TenSanPham = sp?.TenSanPham,
+                                  ThanhTien = ct.ThanhTien
+                              };
 
             return Ok(result);
         }

@@ -26,12 +26,15 @@ namespace Application.PermissionServices
 
         public async Task<ServiceResponse> AddPermissionDefault()
         {
+            if (!_permission.checkAdmin())
+                return Unauthorized(Constants.CodeError.Unauthorized, Constants.MessageResponse.Unauthorized);
+
             var permissions = PermissionDefault();
             var newPermissions = new List<Quyen>();
 
             foreach (var permission in permissions)
             {
-                var check = await _repository.AnyLiqnAsync<Quyen>(x => x.Id == permission.Id);
+                var check = await _repository.AnyLiqnAsync<Quyen>(x => x.Ma == permission.Ma);
                 if (!check)
                 {
                     newPermissions.Add(permission);
@@ -46,6 +49,9 @@ namespace Application.PermissionServices
 
         public async Task<ServiceResponse> GetAllPermisison(PermissionRequest request)
         {
+            if (!_permission.checkAdmin())
+                return Unauthorized(Constants.CodeError.Unauthorized, Constants.MessageResponse.Unauthorized);
+
             var query = new QueryDocument();
             if (!string.IsNullOrWhiteSpace(request.Ma))
             {
@@ -64,19 +70,19 @@ namespace Application.PermissionServices
             {
                 new Quyen()
                 {
-                    Id = Guid.Parse("F16BBCEC-4E1B-4432-BBED-30BC5266E061"),
+                    Id = Guid.Parse("F16BBCEC-4E1B-4432-BBED-30BC5266E061".ToLower()),
                     Ma = Constants.Permission.Admin,
                     Ten = "Admin"
                 },
                 new Quyen()
                 {
-                    Id = Guid.Parse("E9D47F7F-575A-4CDA-BD48-A3B233E47CA4"),
+                    Id = Guid.Parse("E9D47F7F-575A-4CDA-BD48-A3B233E47CA4".ToLower()),
                     Ma = Constants.Permission.NguoiBanHang,
                     Ten = "Người bán hàng"
                 },
                 new Quyen()
                 {
-                    Id = Guid.Parse("61145348-EA4F-4BA1-9AF7-AB836D34F1CD"),
+                    Id = Guid.Parse("61145348-EA4F-4BA1-9AF7-AB836D34F1CD".ToLower()),
                     Ma = Constants.Permission.NguoiGiaoHang,
                     Ten = "Người giao hàng"
                 }

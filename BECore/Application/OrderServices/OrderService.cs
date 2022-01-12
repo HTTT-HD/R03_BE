@@ -45,7 +45,7 @@ namespace Application.OrderServices
                 return NotFound(Constants.CodeError.NotFound, Constants.MessageResponse.NotFound);
 
             var bson = new BsonDocument();
-            bson.Add(nameof(GioHang.CreateBy), _userId.ToString());
+            bson.Add(nameof(GioHang.CreateBy), _userId.ToLowerString());
             bson.Add(nameof(GioHang.CuaHangId), model.CuaHangId.ToString());
             var gioHang = await _repository.FirsOfDefaultAsync<GioHang>(bson);
 
@@ -88,12 +88,19 @@ namespace Application.OrderServices
                 TenCuaHang = cuaHang.TenCuaHang,
                 TongSoLuong = gioHang.TongSoLuong,
                 TongTien = gioHang.TongTien,
-                TrangThai = enumStatus.NhanDon,
+                TrangThai = enumStatus.ChoXacNhan,
                 ChiTiets = chiTiets,
                 NgayTao = DateTime.Now,
-                TienShip = 15000
+                TienShip = 15000,
+                LoaiThanhToan = model.LoaiThanhToan
             };
             await _repository.AddAsync<DonHang>(hoaDon);
+
+            gioHang.ChiTiets = new List<ChiTietGioHang>();
+            gioHang.TongTien = 0;
+            gioHang.TongSoLuong = 0;
+            await _repository.UpdateAsnyc<GioHang>(gioHang.Id.ToString(), gioHang);
+
             return Ok(true);
         }
 
@@ -101,6 +108,8 @@ namespace Application.OrderServices
         {
             var hoaDon = await _repository.GetById<DonHang>(donHangId.ToString());
             if (hoaDon == null) return NotFound(Constants.CodeError.NotFound, Constants.MessageResponse.NotFound);
+            if(hoaDon.TrangThai != enumStatus.ChoXacNhan) return Forbidden(Constants.CodeError.NotStatus, Constants.MessageResponse.NotStatus);
+
             if (hoaDon.ChiTiets != null && hoaDon.ChiTiets.Any())
             {
                 BackgroundJob.Enqueue(() => JobRejectOrder(hoaDon.ChiTiets));
@@ -110,10 +119,27 @@ namespace Application.OrderServices
             return Ok(true);
         }
 
+        public async Task<ServiceResponse> ReceiveOrder(Guid donHangId)
+        {
+            var hoaDon = await _repository.GetById<DonHang>(donHangId.ToString());
+            if (hoaDon == null) return NotFound(Constants.CodeError.NotFound, Constants.MessageResponse.NotFound);
+
+            if (hoaDon.TrangThai != enumStatus.ChoXacNhan) return Forbidden(Constants.CodeError.NotStatus, Constants.MessageResponse.NotStatus);
+
+            hoaDon.TrangThai = enumStatus.NhanDon;
+            hoaDon.TenNguoiGiao = _hoTen;
+            hoaDon.NguoiGiaoId = _userId;
+            await _repository.UpdateAsnyc<DonHang>(hoaDon.Id.ToString(), hoaDon);
+            return Ok(true);
+        }
+
         public async Task<ServiceResponse> TransportOrder(Guid donHangId)
         {
             var hoaDon = await _repository.GetById<DonHang>(donHangId.ToString());
             if (hoaDon == null) return NotFound(Constants.CodeError.NotFound, Constants.MessageResponse.NotFound);
+
+            if (hoaDon.TrangThai != enumStatus.NhanDon) return Forbidden(Constants.CodeError.NotStatus, Constants.MessageResponse.NotStatus);
+
             hoaDon.TrangThai = enumStatus.DangGiao;
             await _repository.UpdateAsnyc<DonHang>(hoaDon.Id.ToString(), hoaDon);
             return Ok(true);
@@ -123,12 +149,110 @@ namespace Application.OrderServices
         {
             var hoaDon = await _repository.GetById<DonHang>(donHangId.ToString());
             if (hoaDon == null) return NotFound(Constants.CodeError.NotFound, Constants.MessageResponse.NotFound);
+
+            if (hoaDon.TrangThai != enumStatus.DangGiao) return Forbidden(Constants.CodeError.NotStatus, Constants.MessageResponse.NotStatus);
+
             hoaDon.TrangThai = enumStatus.DaGiao;
             await _repository.UpdateAsnyc<DonHang>(hoaDon.Id.ToString(), hoaDon);
             return Ok(true);
         }
 
         public async Task<ServiceResponse> GetAll(OrderRequest request)
+        {
+            if (!_permission.checkAdminBHGH())
+                return Unauthorized(Constants.CodeError.Unauthorized, Constants.MessageResponse.Unauthorized);
+
+            var result = new PaginationResult<DonHang>();
+            if (request.PageIndex <= 0)
+            {
+                request.PageIndex = 1;
+            }
+
+            if (request.PageSize <= 0)
+            {
+                request.PageSize = 10;
+            }
+
+            var query = new BsonDocument();
+
+            if (!string.IsNullOrWhiteSpace(request.TuNgay) && !string.IsNullOrWhiteSpace(request.DenNgay))
+            {
+                var fromDate = request.TuNgay.ConvertToDateTimeFormat();
+                var toDate = request.DenNgay.ConvertToDateTimeFormat();
+                query = new BsonDocument {
+                   {
+                      nameof(DonHang.NgayTao),
+                      new BsonDocument {
+                         {
+                            "$gte",
+                            fromDate
+                         }, {
+                            "$lte",
+                            toDate
+                         }
+                      }
+                   }
+                };
+            }
+
+            if (!string.IsNullOrWhiteSpace(_permission) && _permission.Contains(Constants.Permission.NguoiBanHang))
+            {
+                if (_cuaHangIds.Any())
+                {
+                    query.Add(nameof(DonHang.CuaHangId), new BsonDocument("$in", new BsonArray(_cuaHangIds)));
+                }
+                else return Ok(result.Page(null, request.PageIndex, request.PageSize, 0));
+            }
+
+            if (request.CuaHangId != null)
+            {
+                query.Add(nameof(DonHang.CuaHangId), request.CuaHangId.ToString());
+            }
+
+            if (!string.IsNullOrWhiteSpace(request.TenCuaHang))
+            {
+                query.Add(nameof(DonHang.TenCuaHangKd), BsonRegularExpression.Create(new Regex(request.TenCuaHang.ConvertToUnSign())));
+            }
+
+            if (!string.IsNullOrWhiteSpace(request.NguoiDat))
+            {
+                query.Add(nameof(DonHang.NguoiDatKd), BsonRegularExpression.Create(new Regex(request.NguoiDat.ConvertToUnSign())));
+            }
+
+            if (!string.IsNullOrWhiteSpace(request.DiaChiNhan))
+            {
+                query.Add(nameof(DonHang.DiaChiNhanKd), BsonRegularExpression.Create(new Regex(request.DiaChiNhan.ConvertToUnSign())));
+            }
+
+            if (!string.IsNullOrWhiteSpace(request.SoDienThoai))
+            {
+                query.Add(nameof(DonHang.SoDienThoai), request.SoDienThoai);
+            }
+
+            if (request.TrangThai != null)
+            {
+                query.Add(nameof(DonHang.TrangThai), request.TrangThai);
+            }
+
+            if (request.LoaiThanhToan != null)
+            {
+                query.Add(nameof(DonHang.LoaiThanhToan), request.LoaiThanhToan);
+            }
+
+            if (request.TongSoLuong != null)
+            {
+                query.Add(nameof(DonHang.TongSoLuong), request.TongSoLuong);
+            }
+
+            var data = _repository.FindForPageAsync<DonHang>(query, request.PageIndex, request.PageSize);
+            var count = _repository.CountAsync<DonHang>(query);
+            await Task.WhenAll(data, count);
+            
+            return Ok(result.Page(data.Result, request.PageIndex, request.PageSize, count.Result));
+
+        }
+
+        public async Task<ServiceResponse> GetAllForUser(OrderRequest request)
         {
             if (request.PageIndex <= 0)
             {
@@ -148,10 +272,10 @@ namespace Application.OrderServices
                       nameof(DonHang.NgayTao),
                       new BsonDocument {
                          {
-                            "$gt",
+                            "$gte",
                             fromDate
                          }, {
-                            "$lt",
+                            "$lte",
                             toDate
                          }
                       }
@@ -159,14 +283,16 @@ namespace Application.OrderServices
                 };
             }
 
-            if (request.IsUser)
-            {
-                query.Add(nameof(DonHang.ThanhVienId), _userId.ToString());
-            }
+            query.Add(nameof(DonHang.CreateBy), _userId.ToLowerString());
 
             if (!string.IsNullOrWhiteSpace(request.TenCuaHang))
             {
                 query.Add(nameof(DonHang.TenCuaHangKd), BsonRegularExpression.Create(new Regex(request.TenCuaHang.ConvertToUnSign())));
+            }
+
+            if (request.LoaiThanhToan != null)
+            {
+                query.Add(nameof(DonHang.LoaiThanhToan), request.LoaiThanhToan);
             }
 
             if (!string.IsNullOrWhiteSpace(request.NguoiDat))
@@ -211,6 +337,9 @@ namespace Application.OrderServices
 
         public async Task<ServiceResponse> Dashboard(string tuNgay, string denNgay)
         {
+            if (!_permission.checkAdmin())
+                return Unauthorized(Constants.CodeError.Unauthorized, Constants.MessageResponse.Unauthorized);
+
             var query = new BsonDocument();
             if (!string.IsNullOrWhiteSpace(tuNgay) && !string.IsNullOrWhiteSpace(tuNgay))
             {
@@ -221,10 +350,10 @@ namespace Application.OrderServices
                       nameof(DonHang.NgayTao),
                       new BsonDocument {
                          {
-                            "$gt",
+                            "$gte",
                             fromDate
                          }, {
-                            "$lt",
+                            "$lte",
                             toDate
                          }
                       }

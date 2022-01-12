@@ -28,6 +28,9 @@ namespace Application.StoreServices
 
         public async Task<ServiceResponse> AddOrUpdate(StoreViewModel model)
         {
+            if (!_permission.checkAdmin())
+                return Unauthorized(Constants.CodeError.Unauthorized, Constants.MessageResponse.Unauthorized);
+
             var thanhVien = await _repository.FirsOfDefaultAsync<ThanhVien>(x => x.Id == model.ThanhVienId);
             if (thanhVien == null) return NotFound(Constants.CodeError.NotFound, Constants.MessageResponse.NotFound);
 
@@ -62,10 +65,14 @@ namespace Application.StoreServices
 
         public async Task<ServiceResponse> Delete(Guid id)
         {
+            if (!_permission.checkAdmin())
+                return Unauthorized(Constants.CodeError.Unauthorized, Constants.MessageResponse.Unauthorized);
+
             var entity = await _repository.GetById<CuaHang>(id.ToString());
             if (entity == null) return NotFound(Constants.CodeError.NotFound, Constants.MessageResponse.NotFound);
             BackgroundJob.Enqueue(() => DeleteLogicProduc(id));
-            await _repository.DeleteAsync<CuaHang>(id.ToString(), entity);
+            entity.IsDeleted = true;
+            await _repository.UpdateAsnyc<CuaHang>(id.ToString(), entity);
             return Ok(entity);
         }
 
@@ -80,12 +87,45 @@ namespace Application.StoreServices
                 request.PageSize = 10;
             }
             var query = new BsonDocument();
-
-
-            if (request.IsUser)
+            
+            if (!string.IsNullOrWhiteSpace(request.TenCuaHang))
             {
-                query.Add(nameof(CuaHang.ThanhVienId), _userId.ToString());
+                query.Add(nameof(CuaHang.TenCuaHangKd), BsonRegularExpression.Create(new Regex(request.TenCuaHang.ConvertToUnSign())));
             }
+            if (!string.IsNullOrWhiteSpace(request.MoTa))
+            {
+                query.Add(nameof(CuaHang.MoTaKd), BsonRegularExpression.Create(new Regex(request.MoTa.ConvertToUnSign())));
+            }
+            if (!string.IsNullOrWhiteSpace(request.TenThanhVien))
+            {
+                query.Add(nameof(CuaHang.TenThanhVienKd), BsonRegularExpression.Create(new Regex(request.TenThanhVien.ConvertToUnSign())));
+            }
+            if (!string.IsNullOrWhiteSpace(request.SoDienThoai))
+            {
+                query.Add(nameof(CuaHang.SoDienThoai), BsonRegularExpression.Create(new Regex(request.SoDienThoai)));
+            }
+
+            var data = _repository.FindForPageAsync<CuaHang>(query, request.PageIndex, request.PageSize);
+            var count = _repository.CountAsync<CuaHang>(query);
+            await Task.WhenAll(data, count);
+            var result = new PaginationResult<CuaHang>();
+            return Ok(result.Page(data.Result, request.PageIndex, request.PageSize, count.Result));
+        }
+
+        public async Task<ServiceResponse> GetAllForUser(StoreRequest request)
+        {
+            if (request.PageIndex <= 0)
+            {
+                request.PageIndex = 1;
+            }
+            if (request.PageSize <= 0)
+            {
+                request.PageSize = 10;
+            }
+
+            var query = new BsonDocument();
+
+            query.Add(nameof(CuaHang.ThanhVienId), _userId.ToString());
 
             if (!string.IsNullOrWhiteSpace(request.TenCuaHang))
             {

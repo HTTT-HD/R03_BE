@@ -28,6 +28,9 @@ namespace Application.RoleServices
 
         public async Task<ServiceResponse> AddOrUpdate(RoleViewModel model)
         {
+            if (!_permission.checkAdmin())
+                return Unauthorized(Constants.CodeError.Unauthorized, Constants.MessageResponse.Unauthorized);
+
             if (model.Id == null || model.Id == Guid.Empty)
             {
                 var entity = new Vaitro()
@@ -54,12 +57,18 @@ namespace Application.RoleServices
 
         public async Task<ServiceResponse> GetById(Guid id)
         {
+            if (!_permission.checkAdmin())
+                return Unauthorized(Constants.CodeError.Unauthorized, Constants.MessageResponse.Unauthorized);
+
             var entity = await _repository.GetById<Vaitro>(id.ToString());
             if (entity == null) return NotFound(Constants.CodeError.NotFound, Constants.MessageResponse.NotFound);
             return Ok(entity);
         }
         public async Task<ServiceResponse> DeleteAsnyc(Guid id)
         {
+            if (!_permission.checkAdmin())
+                return Unauthorized(Constants.CodeError.Unauthorized, Constants.MessageResponse.Unauthorized);
+
             var entity = await _repository.GetById<Vaitro>(id.ToString());
             if (entity == null) return NotFound(Constants.CodeError.NotFound, Constants.MessageResponse.NotFound);
             await _repository.Remove<Vaitro>(entity.Id.ToString());
@@ -68,6 +77,9 @@ namespace Application.RoleServices
 
         public async Task<ServiceResponse> GetAll(RoleRequest request)
         {
+            if (!_permission.checkAdmin())
+                return Unauthorized(Constants.CodeError.Unauthorized, Constants.MessageResponse.Unauthorized);
+
             if (request.PageIndex <= 0)
             {
                 request.PageIndex = 1;
@@ -90,6 +102,9 @@ namespace Application.RoleServices
 
         public async Task<ServiceResponse> AddPermission(AddPermisisonToRole request)
         {
+            if (!_permission.checkAdmin())
+                return Unauthorized(Constants.CodeError.Unauthorized, Constants.MessageResponse.Unauthorized);
+
             var vaiTro = await _repository.GetById<Vaitro>(request.VaiTroId.ToString());
             if (vaiTro == null) return NotFound(Constants.CodeError.NotFound, Constants.MessageResponse.NotFound);
 
@@ -120,6 +135,9 @@ namespace Application.RoleServices
 
         public async Task<ServiceResponse> AddUser(AddUserToRole request)
         {
+            if (!_permission.checkAdmin())
+                return Unauthorized(Constants.CodeError.Unauthorized, Constants.MessageResponse.Unauthorized);
+
             var vaiTro = await _repository.GetById<Vaitro>(request.VaiTroId.ToString());
             if (vaiTro == null) return NotFound(Constants.CodeError.NotFound, Constants.MessageResponse.NotFound);
 
@@ -152,6 +170,9 @@ namespace Application.RoleServices
 
         public async Task<ServiceResponse> GetPermissionInRole(PermissionRequest request)
         {
+            if (!_permission.checkAdmin())
+                return Unauthorized(Constants.CodeError.Unauthorized, Constants.MessageResponse.Unauthorized);
+
             var entity = await _repository.GetById<Vaitro>(request.VaiTroId.ToString());
             if (entity == null) return NotFound(Constants.CodeError.NotFound, Constants.MessageResponse.NotFound);
 
@@ -181,6 +202,9 @@ namespace Application.RoleServices
 
         public async Task<ServiceResponse> GetUserInRole(UserInRole request)
         {
+            if (!_permission.checkAdmin())
+                return Unauthorized(Constants.CodeError.Unauthorized, Constants.MessageResponse.Unauthorized);
+
             var entity = await _repository.GetById<Vaitro>(request.VaiTroId.ToString());
             if (entity == null) return NotFound(Constants.CodeError.NotFound, Constants.MessageResponse.NotFound);
 
@@ -233,6 +257,9 @@ namespace Application.RoleServices
 
         public async Task<ServiceResponse> GetUserOutRole(UserInRole request)
         {
+            if (!_permission.checkAdmin())
+                return Unauthorized(Constants.CodeError.Unauthorized, Constants.MessageResponse.Unauthorized);
+
             var entity = await _repository.GetById<Vaitro>(request.VaiTroId.ToString());
             if (entity == null) return NotFound(Constants.CodeError.NotFound, Constants.MessageResponse.NotFound);
 
