@@ -17,6 +17,12 @@ namespace Common.ViewModels.Order
         public string DiaChiNhan { get; set; }
         [Required]
         public Guid CuaHangId { get; set; }
+        public enumPayment? LoaiThanhToan { get; set; }
+    }
+
+    public class UpdatePayment
+    {
+        public Guid DonHangId { get; set; }
         public enumPayment LoaiThanhToan { get; set; }
     }
 

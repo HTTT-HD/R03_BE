@@ -101,7 +101,16 @@ namespace Application.OrderServices
             gioHang.TongSoLuong = 0;
             await _repository.UpdateAsnyc<GioHang>(gioHang.Id.ToString(), gioHang);
 
-            return Ok(true);
+            return Ok(hoaDon);
+        }
+
+        public async Task<ServiceResponse> UpdatePayment(UpdatePayment payment)
+        {
+            var hoaDon = await _repository.GetById<DonHang>(payment.DonHangId.ToString());
+            if(hoaDon == null) return NotFound(Constants.CodeError.NotFound, Constants.MessageResponse.NotFound);
+            hoaDon.LoaiThanhToan = payment.LoaiThanhToan;
+            await _repository.UpdateAsnyc<DonHang>(hoaDon.Id.ToString(), hoaDon);
+            return Ok(hoaDon);
         }
 
         public async Task<ServiceResponse> RejectOrder(Guid donHangId)

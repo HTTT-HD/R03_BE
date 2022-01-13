@@ -26,6 +26,12 @@ namespace BECore.API.Controllers
             return await _service.Order(model);
         }
 
+        [HttpPut("update-payment")]
+        public async Task<ServiceResponse> Order(UpdatePayment model)
+        {
+            return await _service.UpdatePayment(model);
+        }
+
         [HttpPut("reject")]
         public async Task<ServiceResponse> RejectOrder(Guid donHangId)
         {

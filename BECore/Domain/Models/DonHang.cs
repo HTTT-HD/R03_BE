@@ -36,7 +36,7 @@ namespace Domain.Models
         
         public string TenTrangThai { get { return TrangThai.GetDisplayName(); } set { } }
 
-        public enumPayment LoaiThanhToan { get; set; }
+        public enumPayment? LoaiThanhToan { get; set; }
         public string TenLoaiThanhToan { get { return LoaiThanhToan.GetDisplayName(); } set { } }
 
         public int TongSoLuong { get; set; }
