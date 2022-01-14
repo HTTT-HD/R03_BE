@@ -204,14 +204,14 @@ namespace Application.OrderServices
                 };
             }
 
-            if (!string.IsNullOrWhiteSpace(_permission) && _permission.Contains(Constants.Permission.NguoiBanHang))
-            {
-                if (_cuaHangIds.Any())
-                {
-                    query.Add(nameof(DonHang.CuaHangId), new BsonDocument("$in", new BsonArray(_cuaHangIds)));
-                }
-                else return Ok(result.Page(null, request.PageIndex, request.PageSize, 0));
-            }
+            //if (!string.IsNullOrWhiteSpace(_permission) && _permission.Contains(Constants.Permission.NguoiBanHang))
+            //{
+            //    if (_cuaHangIds != null && _cuaHangIds.Any())
+            //    {
+            //        query.Add(nameof(DonHang.CuaHangId), new BsonDocument("$in", new BsonArray(_cuaHangIds)));
+            //    }
+            //    else return Ok(result.Page(null, request.PageIndex, request.PageSize, 0));
+            //}
 
             if (request.CuaHangId != null)
             {
