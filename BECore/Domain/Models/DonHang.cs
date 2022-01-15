@@ -44,7 +44,7 @@ namespace Domain.Models
         public long TienShip { get; set; }
         
         public DateTime NgayTao { get; set; }
-        [JsonIgnore]
+        
         public List<ChiTietDonHang> ChiTiets { get; set; }
     }
     public class ChiTietDonHang

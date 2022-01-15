@@ -16,7 +16,7 @@ namespace Common.ViewModels.Product
 
         [Required]
         public Guid DanhMucId { get; set; } 
-        [Required]
+        
         public string Img { get; set; }
 
         [Required, MaxLength(500)]
